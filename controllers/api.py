@@ -1,5 +1,8 @@
 import random
 
+def index():
+    pass
+
 # Mocks implementation.
 def get_tracks():
     start_idx = int(request.vars.start_idx) if request.vars.start_idx is not None else 0
@@ -13,8 +16,9 @@ def get_tracks():
             title = random.choice(['Falling U', 'TTL', 'Piano Man']),
             duration = random.uniform(3 * 60, 4 * 60),
             rating = random.randint(1, 5),
-            num_plays = random.randing(0, 100),
+            num_plays = random.randint(0, 100),
         )
+        tracks.append(t)
     has_more = True
     logged_in = False
     return response.json(dict(
