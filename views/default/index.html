@@ -4,4 +4,47 @@
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 {{end}}
 
+<div class="main_content">
+
+    <h2>Tracks</h2>
+
+    <div id="vue-div" class="display:none">
+        <div class="button_bar">
+            <button class="btn btn-danger btn-sm" v-on:click="add_track()" v-bind:class="{'disabled': !logged_in}">{{=icon_add}}Add track</button>
+        </div>
+
+        <div class="result_table">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                    <th>Track</th>
+                    <th>Duration</th>
+                    <th>Rating</th>
+                    <th>N Plays</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="track in tracks">
+                    <td></td>
+                    <td>${track.artist}</td>
+                    <td>${track.album}</td>
+                    <td>${track.title}</td>
+                    <td>${track.duration}</td>
+                    <td>${track.rating}</td>
+                    <td>${track.num_plays}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div v-if="has_more" class="show_more"><button class="btn btn-default" v-on:click="get_more()">Load more</button></div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
