@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 
-{{block header}}
+{{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 {{end}}
 
@@ -38,7 +38,8 @@
                 </tr>
                 </tbody>
             </table>
-            <div v-if="has_more" class="show_more"><button class="btn btn-default" v-on:click="get_more()">Load more</button></div>
+            <div v-if="has_more" class="show_more">
+                <button class="btn btn-default" v-on:click="get_more()">Load more</button></div>
         </div>
     </div>
 
