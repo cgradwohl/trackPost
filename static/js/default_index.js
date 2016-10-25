@@ -55,7 +55,8 @@ var app = function() {
             is_adding_track: false,
             tracks: [],
             logged_in: false,
-            has_more: false
+            has_more: false,
+            form_artist: null
         },
         methods: {
             get_more: self.get_more,
