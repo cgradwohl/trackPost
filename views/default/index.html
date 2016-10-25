@@ -10,7 +10,45 @@
 
     <div id="vue-div" class="display:none">
         <div class="button_bar">
-            <button class="btn btn-danger btn-sm" v-on:click="add_track()" v-bind:class="{'disabled': !logged_in}">{{=icon_add}}Add track</button>
+            <button v-if="!is_adding_track"} class="btn btn-danger btn-sm" v-on:click="add_track()" v-bind:class="{'disabled': !logged_in}" v-bind:class="{'vue_hidden': is_adding_track}">
+            {{=icon_add}}Add track
+            </button>
+        </div>
+
+        <div id="add_track_div" v-bind:class="{'vue_hidden': !is_adding_track}">
+            <form action="#" class="form-horizontal" enctype="multipart/form-data" method="post">
+                <div class="form-group" id="no_table_artist__row">
+                    <label class="control-label col-sm-3" for="no_table_artist" id="no_table_artist__label">Artist</label>
+                    <div class="col-sm-9">
+                        <input class="form-control string" id="no_table_artist" name="artist" type="text" value="" />
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="no_table_album__row">
+                    <label class="control-label col-sm-3" for="no_table_album" id="no_table_album__label">Album</label>
+                    <div class="col-sm-9">
+                        <input class="form-control string" id="no_table_album" name="album" type="text" value="" />
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="no_table_track__row">
+                    <label class="control-label col-sm-3" for="no_table_track" id="no_table_track__label">Track</label>
+                    <div class="col-sm-9"><input class="form-control string" id="no_table_track" name="track" type="text" value="" />
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="no_table_duration__row">
+                    <label class="control-label col-sm-3" for="no_table_duration" id="no_table_duration__label">Duration</label>
+                    <div class="col-sm-9"><input class="form-control string" id="no_table_duration" name="duration" type="text" value="" />
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="submit_record__row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <input class="btn btn-primary" type="submit" value="Submit" />
+                    </div>
+                </div>
+            </form>
         </div>
 
         <div class="result_table">

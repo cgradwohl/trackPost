@@ -20,7 +20,7 @@ def get_tracks():
         )
         tracks.append(t)
     has_more = True
-    logged_in = False
+    logged_in = auth.user_id is not None
     return response.json(dict(
         tracks=tracks,
         logged_in=logged_in,

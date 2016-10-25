@@ -2,7 +2,7 @@
 
 var app = function() {
 
-    self = {};
+    var self = {};
 
     Vue.config.silent = false; // show all warnings
 
@@ -38,17 +38,24 @@ var app = function() {
         self.vue.show_reviewers = false;
     };
 
+    self.add_track = function () {
+        // The button to add a track has been pressed.
+        self.vue.is_adding_track = true;
+    };
+
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
+            is_adding_track: false,
             tracks: [],
             logged_in: false,
             has_more: false
         },
         methods: {
             get_more: self.get_more,
+            add_track: self.add_track
         }
 
     });
