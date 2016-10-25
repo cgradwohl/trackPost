@@ -9,17 +9,21 @@ def get_tracks():
     end_idx = int(request.vars.end_idx) if request.vars.end_idx is not None else 0
     # We just generate a lot of of data.
     tracks = []
-    for i in range(start_idx, end_idx):
-        t = dict(
-            artist = random.choice(['IU', 'Ailee', 'T-ara', 'Mamamoo']),
-            album = random.choice(['Modern times', 'Melting', 'Absolute']),
-            title = random.choice(['Falling U', 'TTL', 'Piano Man']),
-            duration = random.uniform(3 * 60, 4 * 60),
-            rating = random.randint(1, 5),
-            num_plays = random.randint(0, 100),
-        )
-        tracks.append(t)
-    has_more = True
+    has_more = False
+    rows = db().select(db.track.ALL, limitby=(start_idx, end_idx + 1))
+    for i, r in enumerate(rows):
+        if i < end_idx - start_idx:
+            t = dict(
+                artist = r.artist,
+                album = r.album,
+                title = r.title,
+                duration = r.duration,
+                rating = r.rating,
+                num_plays = r.num_plays,
+            )
+            tracks.append(t)
+        else:
+            has_more = True
     logged_in = auth.user_id is not None
     return response.json(dict(
         tracks=tracks,
@@ -28,7 +32,7 @@ def get_tracks():
     ))
 
 def add_track():
-    t = dict(
+    t_id = db.track.insert(
         artist = request.vars.artist,
         album = request.vars.album,
         title = request.vars.title,
@@ -36,4 +40,5 @@ def add_track():
         rating = 0,
         num_plays = 0
     )
+    t = db.track(t_id)
     return response.json(dict(track=t))
