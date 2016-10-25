@@ -38,9 +38,13 @@ var app = function() {
         self.vue.show_reviewers = false;
     };
 
-    self.add_track = function () {
+    self.add_track_button = function () {
         // The button to add a track has been pressed.
         self.vue.is_adding_track = !self.vue.is_adding_track;
+    };
+
+    self.add_track = function () {
+        // The submit button to add a track has been added.
     };
 
     self.vue = new Vue({
@@ -55,7 +59,7 @@ var app = function() {
         },
         methods: {
             get_more: self.get_more,
-            add_track: self.add_track
+            add_track_button: self.add_track_button
         }
 
     });

@@ -10,16 +10,16 @@
 
     <div id="vue-div" class="display:none">
         <div class="button_bar">
-            <button v-if="!is_adding_track" class="btn btn-danger btn-sm" v-on:click="add_track()" v-bind:class="{'disabled': !logged_in}">
+            <button v-if="!is_adding_track" class="btn btn-danger btn-sm" v-on:click="add_track_button()" v-bind:class="{'disabled': !logged_in}">
             {{=icon_add}}Add track
             </button>
-            <button v-if="is_adding_track" class="btn btn-warning btn-sm" v-on:click="add_track()">
+            <button v-if="is_adding_track" class="btn btn-warning btn-sm" v-on:click="add_track_button()">
             {{=icon_cancel}}Cancel
             </button>
         </div>
 
         <div v-if="is_adding_track" id="add_track_div">
-            <form action="#" class="form-horizontal" enctype="multipart/form-data" method="post">
+            <form action="#" v-on:submit.prevent="add_track" class="form-horizontal" enctype="multipart/form-data" method="post">
                 <div class="form-group" id="no_table_artist__row">
                     <label class="control-label col-sm-3" for="no_table_artist" id="no_table_artist__label">Artist</label>
                     <div class="col-sm-9">
