@@ -40,7 +40,7 @@ var app = function() {
 
     self.add_track = function () {
         // The button to add a track has been pressed.
-        self.vue.is_adding_track = true;
+        self.vue.is_adding_track = !self.vue.is_adding_track;
     };
 
     self.vue = new Vue({
