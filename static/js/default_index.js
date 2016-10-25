@@ -30,8 +30,8 @@ var app = function() {
     };
 
     self.get_more = function () {
-        var num_tracks = self.vue.papers.length;
-        $.getJSON(get_paper_url(num_tracks, num_tracks + 50), function (data) {
+        var num_tracks = self.vue.tracks.length;
+        $.getJSON(get_tracks_url(num_tracks, num_tracks + 50), function (data) {
             self.vue.has_more = data.has_more;
             self.extend(self.vue.tracks, data.tracks);
         });
