@@ -2,11 +2,16 @@
 
 {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+    var tracks_url = "{{=URL('api', 'get_tracks')}}";
+    var add_track_url = "{{=URL('api', 'add_track', user_signature=True)}}";
+</script>
 {{end}}
 
 <div class="main_content">
 
     <h2>Tracks</h2>
+
 
     <div id="vue-div" class="display:none">
         <div class="button_bar">
@@ -21,34 +26,30 @@
         <div v-if="is_adding_track" id="add_track_div">
             <form action="#" v-on:submit.prevent="add_track" class="form-horizontal" enctype="multipart/form-data" method="post">
                 <div class="form-group" id="no_table_artist__row">
-                    <label class="control-label col-sm-3" for="no_table_artist" id="no_table_artist__label">Artist</label>
-                    <div class="col-sm-9">
+                    <div>
                         <input class="form-control string" id="no_table_artist" v-model="form_artist" placeholder="Artist" type="text" />
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group" id="no_table_album__row">
-                    <label class="control-label col-sm-3" for="no_table_album" id="no_table_album__label">Album</label>
-                    <div class="col-sm-9">
-                        <input class="form-control string" id="no_table_album" name="album" type="text" value="" />
+                    <div>
+                        <input class="form-control string" id="no_table_album" name="album" type="text" v-model="form_album" placeholder="Album"/>
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group" id="no_table_track__row">
-                    <label class="control-label col-sm-3" for="no_table_track" id="no_table_track__label">Track</label>
-                    <div class="col-sm-9"><input class="form-control string" id="no_table_track" name="track" type="text" value="" />
+                    <div><input class="form-control string" id="no_table_track" name="track" type="text" v-model="form_track" placeholder="Track"/>
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group" id="no_table_duration__row">
-                    <label class="control-label col-sm-3" for="no_table_duration" id="no_table_duration__label">Duration</label>
-                    <div class="col-sm-9"><input class="form-control string" id="no_table_duration" name="duration" type="text" value="" />
+                    <div><input class="form-control string" id="no_table_duration" name="duration" type="text" v-model="form_duration" placeholder="Duration in seconds" />
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group" id="submit_record__row">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        <input class="btn btn-primary" type="submit" value="Submit" />
+                    <div>
+                        <input class="btn btn-primary" id="add_track_submit" type="submit" value="Submit" />
                     </div>
                 </div>
             </form>

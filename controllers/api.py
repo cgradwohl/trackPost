@@ -26,3 +26,14 @@ def get_tracks():
         logged_in=logged_in,
         has_more=has_more,
     ))
+
+def add_track():
+    t = dict(
+        artist = request.vars.artist,
+        album = request.vars.album,
+        title = request.vars.title,
+        duration = request.vars.duration,
+        rating = 0,
+        num_plays = 0
+    )
+    return response.json(dict(track=t))
