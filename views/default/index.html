@@ -5,6 +5,7 @@
 <script>
     var tracks_url = "{{=URL('api', 'get_tracks')}}";
     var add_track_url = "{{=URL('api', 'add_track', user_signature=True)}}";
+    var del_track_url = "{{=URL('api', 'del_track', user_signature=True)}}";
 </script>
 {{end}}
 
@@ -66,6 +67,7 @@
                     <th>Duration</th>
                     <th>Rating</th>
                     <th>N Plays</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,6 +79,7 @@
                     <td>${track.duration}</td>
                     <td>${track.rating}</td>
                     <td>${track.num_plays}</td>
+                    <td><i class="fa fa-trash-o" v-on:click="delete_track(track.id)"></i></td>
                 </tr>
                 </tbody>
             </table>

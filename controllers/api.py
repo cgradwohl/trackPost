@@ -14,6 +14,7 @@ def get_tracks():
     for i, r in enumerate(rows):
         if i < end_idx - start_idx:
             t = dict(
+                id = r.id,
                 artist = r.artist,
                 album = r.album,
                 title = r.title,
@@ -31,6 +32,7 @@ def get_tracks():
         has_more=has_more,
     ))
 
+@auth.requires_signature()
 def add_track():
     t_id = db.track.insert(
         artist = request.vars.artist,
@@ -42,3 +44,8 @@ def add_track():
     )
     t = db.track(t_id)
     return response.json(dict(track=t))
+
+@auth.requires_signature()
+def del_track():
+    db(db.track.id == request.vars.track_id).delete()
+    return "ok"

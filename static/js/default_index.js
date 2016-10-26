@@ -52,8 +52,29 @@ var app = function() {
                 duration: self.vue.form_duration
             },
             function (data) {
-            self.vue.tracks.unshift(data.track);
-        });
+                $.web2py.enableElement($("#add_track_submit"));
+                self.vue.tracks.unshift(data.track);
+            });
+    };
+
+    self.delete_track = function(track_id) {
+        $.post(del_track_url,
+            {
+                track_id: track_id
+            },
+            function () {
+                idx = null;
+                for (var i = 0; i < self.vue.tracks.length; i++) {
+                    if (self.vue.tracks[i].id === track_id) {
+                        idx = i;
+                        break;
+                    }
+                }
+                if (idx) {
+                    self.vue.tracks.pop(idx);
+                }
+            }
+        )
     };
 
     self.vue = new Vue({
@@ -73,7 +94,8 @@ var app = function() {
         methods: {
             get_more: self.get_more,
             add_track_button: self.add_track_button,
-            add_track: self.add_track
+            add_track: self.add_track,
+            delete_track: self.delete_track
         }
 
     });
