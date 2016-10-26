@@ -63,15 +63,17 @@ var app = function() {
                 track_id: track_id
             },
             function () {
-                idx = null;
+                var idx = null;
                 for (var i = 0; i < self.vue.tracks.length; i++) {
                     if (self.vue.tracks[i].id === track_id) {
-                        idx = i;
+                        // If I set this to i, it won't work, as the if below will
+                        // return false for items in first position.
+                        idx = i + 1;
                         break;
                     }
                 }
                 if (idx) {
-                    self.vue.tracks.pop(idx);
+                    self.vue.tracks.splice(idx - 1, 1);
                 }
             }
         )
