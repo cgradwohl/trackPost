@@ -4,10 +4,13 @@
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 
 
-<!-- this is a hack that creates a URL server side(web2py) for our tracks -->
+<!-- this is a hack that creates a URL server side(web2py) for our tracks. the var
+     is a js string that is passed to python server side-->
 <!-- note that this index page only usees 3 js scripts: 1. vue.js 2. this hack 3.
-     deafault_index.js  therefore all function calls from default_index.js-->
+     default_index.js  therefore all function calls from default_index.js-->
 <script>
+    // URL('file', 'method')
+    // you can see actual path in developer tools
     var tracks_url = "{{=URL('api', 'get_tracks')}}";
     var add_track_url = "{{=URL('api', 'add_track', user_signature=True)}}";
     var del_track_url = "{{=URL('api', 'del_track', user_signature=True)}}";
@@ -29,7 +32,9 @@
             </button>
         </div>
 
+
         <div v-if="is_adding_track" id="add_track_div">
+            <!-- calls add_track form default_index.js on submit, prevents page reload -->
             <form action="#" v-on:submit.prevent="add_track" class="form-horizontal" enctype="multipart/form-data" method="post">
                 <div class="form-group" id="no_table_artist__row">
                     <div>

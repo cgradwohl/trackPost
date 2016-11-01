@@ -39,12 +39,15 @@ var app = function() {
     };
 
     self.add_track_button = function () {
-        // The button to add a track has been pressed.
+        // boolean to display or remove the add_track div
         self.vue.is_adding_track = !self.vue.is_adding_track;
     };
 
     self.add_track = function () {
-        // The submit button to add a track has been added.
+        //boolean to display or remove the add_track div
+        self.vue.is_adding_track = !self.vue.is_adding_track;
+        // Since default_index.js is embedded into index.html,
+        // this method grabs the add_track_url from our hack script
         $.post(add_track_url,
             {
                 artist: self.vue.form_artist,
@@ -80,6 +83,7 @@ var app = function() {
         )
     };
 
+    // interface for the Vue object
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
