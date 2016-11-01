@@ -48,6 +48,12 @@ var app = function() {
         self.vue.is_adding_track = !self.vue.is_adding_track;
         // Since default_index.js is embedded into index.html,
         // this method grabs the add_track_url from our hack script
+        // from dev tools  add_track_url = ../api/add_track, so when we make the post request
+        // it looks for the method add_track in api.py , so:
+        // 1. we make a post request to add_track_url = /api/add_track
+        // 2. /api/add_track defines the server logic to finish the post requests(see api.py for usefulls notes)
+        // 3. the POST requests responds with the JSON object as a validation,
+        // so we can simply add this json object to the tracks array defined in the VUE object    
         $.post(add_track_url,
             {
                 artist: self.vue.form_artist,

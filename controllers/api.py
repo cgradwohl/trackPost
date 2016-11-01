@@ -34,6 +34,8 @@ def get_tracks():
 
 @auth.requires_signature()
 def add_track():
+    # inserts into the table called tracks in tables.py
+    # here every field must be accounted for
     t_id = db.track.insert(
         artist = request.vars.artist,
         album = request.vars.album,
@@ -42,7 +44,10 @@ def add_track():
         rating = 0,
         num_plays = 0
     )
+    # web2py gives the table a track id, i.e. "this.table.insert"
     t = db.track(t_id)
+    # returns t_id as the json object 'track'
+    # this is what is returned to the callback function in default_index/add_track()
     return response.json(dict(track=t))
 
 @auth.requires_signature()
